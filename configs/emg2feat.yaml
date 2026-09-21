@@ -1,0 +1,9 @@
+defaults:
+  - common
+  - _self_
+
+exp_name: tap_ets           # output folder under exp_path
+split: test
+
+ckpt: released              # 'released' (data/models/tap_ets.pt) or a .pt/.ckpt path
+refiner_ckpt: released      # 'released' (data/models/tap_refine.pt) or a .pt/.ckpt path

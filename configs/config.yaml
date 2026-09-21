@@ -1,0 +1,15 @@
+defaults:
+  - common
+  - trainer: trainer
+  - optimizer: adamw
+  - emg_enc: enc
+  - feature: mspec22
+  - _self_
+
+exp_name: ???
+resume: null                # checkpoint to resume from
+target_sec: 4               # random crop length
+batch_size: 64              # per GPU
+num_workers: 4
+phoneme_loss_weight: 0.5    # lambda_ph
+mel_loss_weight: 0.5        # lambda_mel
