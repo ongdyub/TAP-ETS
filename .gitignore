@@ -1,0 +1,10 @@
+__pycache__/
+*.pyc
+.DS_Store
+outputs/
+wandb/
+*.ckpt
+.pytest_cache/
+
+# downloaded separately (see README)
+data/models/*.pt

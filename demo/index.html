@@ -1,0 +1,426 @@
+<!DOCTYPE HTML>
+<!--
+	Photon by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html lang="en">
+	<head>
+		<title>TAP-ETS: Time Aligned Phoneme Guiding for EMG-to-Speech Synthesis (Interspeech 2026)</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="description" content="Audio samples and demo for TAP-ETS (Interspeech 2026): EMG-to-speech synthesis guided by time-aligned phonemes." />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+		<style>
+			/* ---------- Header ---------- */
+			#header .inner h1 { font-size: 2.6em; line-height: 1.25; }
+			#header .inner .venue { font-size: 0.85em; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.85; margin-bottom: 1.25em; }
+			#header .inner .authors { font-size: 1.15em; margin: 0 0 0.35em 0; }
+			#header .inner .authors sup { font-size: 0.6em; opacity: 0.85; }
+			#header .inner .affil { font-size: 0.85em; opacity: 0.8; line-height: 1.6; margin: 0 0 0.35em 0; }
+			#header .inner .email { font-size: 0.8em; opacity: 0.7; font-family: "Courier New", monospace; margin: 0 0 1.75em 0; }
+			#header .inner .actions { margin-top: 0; }
+			#header .inner .actions .button { min-width: 10em; }
+			@media (max-width: 736px) {
+				#header .inner h1 { font-size: 1.7em; }
+				#header .inner .authors { font-size: 1em; }
+				#header .inner .affil { font-size: 0.78em; }
+				#header .inner .email { font-size: 0.72em; word-break: break-all; }
+				#header .inner .actions li { display: block; padding: 0.35em 0; }
+				#header .inner .actions .button { width: 100%; }
+			}
+
+			@media (max-width: 736px) { .desktop-only { display: none; } }
+
+			/* ---------- Figures ---------- */
+			.fig-grid { margin-top: 1.25rem; display: flex; align-items: stretch; }
+			.fig-card { display: flex; flex-direction: column; text-align: center; }
+			.fig-card .image { flex-grow: 1; border: none; }
+			.fig-card .image.fit { margin: 0; }
+			.fig-card img { background: #fff; }
+			.fig-cap { margin-top: 0.6rem; font-size: 0.95em; opacity: 0.9; }
+
+			/* ---------- Samples section ---------- */
+			#samples.main.style2 { background: linear-gradient(180deg, #3a4656 0%, #2f3946 100%); color: rgba(255,255,255,0.85); }
+			#samples.main.style2 h2 { color: #fff; }
+			#samples.main.style2 p { color: rgba(255,255,255,0.78); }
+			#samples .note { font-size: 0.9em; opacity: 0.75; }
+
+			#samples .table-wrapper { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 0.75rem; overflow: visible; }
+			.sample-table { width: 100%; border-collapse: separate; border-spacing: 0; }
+			.sample-table thead th { background: rgba(255,255,255,0.06); color: rgba(255,255,255,0.88); font-weight: 700; border-bottom: 1px solid rgba(255,255,255,0.10); text-align: left; }
+			.sample-table th, .sample-table td { padding: 0.85rem; vertical-align: top; }
+			.sample-table tbody tr td { border-top: 1px solid rgba(255,255,255,0.07); }
+			.sample-table tbody tr:hover td { background: rgba(255,255,255,0.04); }
+
+			.num-badge { display: inline-block; min-width: 2.2em; text-align: center; padding: 0.15em 0.45em; border-radius: 6px; background: rgba(255,255,255,0.10); font-weight: 700; color: #fff; }
+			.gt { color: rgba(255,255,255,0.92); font-weight: 600; line-height: 1.5; }
+			.gt-label { display: none; }
+
+			.sample-box { background: rgba(0,0,0,0.18); border: 1px solid rgba(255,255,255,0.10); border-radius: 10px; padding: 0.7rem 0.75rem; }
+			.box-label { display: none; }
+			td.ours .sample-box { border-color: rgba(120,200,160,0.35); }
+			.sample-box audio { width: 100%; display: block; filter: saturate(0.9) contrast(0.95); }
+			.transcript { margin-top: 0.55rem; font-family: "Courier New", monospace; font-size: 0.85em; line-height: 1.45; color: rgba(255,255,255,0.86); background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px; padding: 0.4rem 0.55rem; word-break: break-word; }
+			.sample-meta { margin-top: 0.4rem; font-size: 0.85em; color: rgba(255,255,255,0.65); }
+			.wer { font-family: "Courier New", monospace; font-weight: 700; color: rgba(255,255,255,0.9); margin-left: 0.25em; }
+			.wer.good { color: #8fe0b2; }
+
+			/* ---------- Samples: mobile card layout ---------- */
+			@media (max-width: 736px) {
+				#samples .table-wrapper { padding: 0; background: none; border: none; }
+				.sample-table, .sample-table tbody, .sample-table tr, .sample-table td { display: block; width: 100%; }
+				.sample-table thead { display: none; }
+				.sample-table tbody tr { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.10); border-radius: 12px; padding: 0.75rem; margin-bottom: 1rem; }
+				.sample-table tbody tr td { border-top: none; padding: 0.35rem 0; }
+				.sample-table tbody tr:hover td { background: none; }
+				td.num { padding-bottom: 0; }
+				.gt-label { display: block; font-size: 0.7em; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.55); font-weight: 600; margin-bottom: 0.2rem; }
+				.box-label { display: block; font-size: 0.7em; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.6); font-weight: 700; margin-bottom: 0.45rem; }
+				td.ours .box-label { color: #8fe0b2; }
+			}
+
+			/* ---------- Citation ---------- */
+			#cite pre { text-align: left; font-size: 0.8em; line-height: 1.5; white-space: pre-wrap; word-break: break-word; }
+			#footer .icons a { font-size: 1.1em; }
+		</style>
+	</head>
+
+	<body class="is-preload">
+
+		<!-- Header -->
+		<section id="header">
+			<div class="inner">
+				<p class="venue">Interspeech 2026</p>
+				<h1><strong>TAP-ETS: Time Aligned Phoneme Guiding<br class="desktop-only" /> for EMG-to-Speech Synthesis</strong></h1>
+				<p class="authors">
+					Dongyub Han<sup>1,2</sup>, Injune Hwang<sup>1,2</sup>, Jaejun Lee<sup>1,2</sup>, Jiwon Lee<sup>1,3</sup>, Kyogu Lee<sup>1,2,3,4</sup>
+				</p>
+				<p class="affil">
+					<sup>1</sup>Music and Audio Research Group (MARG), <sup>2</sup>Department of Intelligence and Information,<br />
+					<sup>3</sup>Interdisciplinary Program in Artificial Intelligence, <sup>4</sup>Artificial Intelligence Institute<br />
+					Seoul National University, Republic of Korea
+				</p>
+				<p class="email">{handy912, dlswns8, jjlee0721, scjjw8285, kglee}@snu.ac.kr</p>
+				<ul class="actions special">
+					<li><a href="https://github.com/ongdyub/TAP-ETS" class="button primary icon brands fa-github" target="_blank" rel="noopener">Code</a></li>
+					<li><a href="#samples" class="button scrolly icon solid fa-headphones">Audio samples</a></li>
+					<!-- 논문 PDF 링크가 생기면 아래 주석을 풀고 href만 채우세요 (ISCA Archive / arXiv) -->
+					<!-- <li><a href="PAPER_URL" class="button icon solid fa-file-pdf" target="_blank" rel="noopener">Paper</a></li> -->
+				</ul>
+			</div>
+		</section>
+
+		<!-- Abstract + Method -->
+		<section id="overview" class="main style1">
+			<div class="container">
+
+				<header class="major" style="margin-top:0;">
+					<h2 style="margin-bottom:0.75rem;">Abstract</h2>
+				</header>
+				<p>
+					Electromyography (EMG)-to-speech (ETS) synthesis generates speech from articulatory muscle activity without acoustic input. We propose TAP-ETS, a time-aligned phoneme guiding framework that conditions mel-spectrogram generation on frame-wise phoneme sequences through cross-attention. Unlike prior work that treats phonemes as auxiliary supervision, our model injects aligned phoneme embeddings directly into the decoder. We also introduce refinement strategies that redistribute merged semantic guidance over frame-wise EMG signals, enabling the seamless integration of arbitrary phoneme- or text-level correction methods without modifying the synthesis model. On the Gaddy silent EMG benchmark, TAP-ETS reduces WER from 25.12% to 19.77%, achieving state-of-the-art performance and demonstrating the importance of accurate frame-level alignment.
+				</p>
+
+				<hr style="margin:2.5rem 0;" />
+
+				<header class="major">
+					<h2>Method</h2>
+				</header>
+
+				<div class="row gtr-150 fig-grid">
+					<div class="col-6 col-12-medium fig-card">
+						<a class="image fit" href="images/fig1.jpg" target="_blank" rel="noopener" title="Open full size"><img src="images/fig1.jpg" alt="Figure 1: ETS training with time-aligned phoneme conditioning" /></a>
+						<p class="fig-cap"><b>Figure 1.</b> Schematic diagram of ETS training with time-aligned phoneme conditioning. The EMG encoder feature <b>h</b> serves as the query, and time-aligned phoneme embeddings serve as key / value of the cross-attention decoder.</p>
+					</div>
+					<div class="col-6 col-12-medium fig-card">
+						<a class="image fit" href="images/fig2.jpg" target="_blank" rel="noopener" title="Open full size"><img src="images/fig2.jpg" alt="Figure 2: Inference with time-aligned phoneme refinement" /></a>
+						<p class="fig-cap"><b>Figure 2.</b> Schematic diagram of semantic guiding with time-aligned phoneme refinement during inference. Any phoneme- or text-level correction module can be plugged in without modifying the synthesis model.</p>
+					</div>
+					<div class="col-8 off-2 col-12-medium fig-card">
+						<a class="image fit" href="images/fig3.png" target="_blank" rel="noopener" title="Open full size"><img src="images/fig3.png" alt="Figure 3: Levenshtein-distance alignment and masking-based refinement" /></a>
+						<p class="fig-cap"><b>Figure 3.</b> Schematic diagram of semantic guiding with TAP. (a) illustrates the Levenshtein distance based alignment. (b) shows the training procedure of the masking-based refinement model.</p>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<!-- Samples -->
+		<section id="samples" class="main style2">
+			<div class="container">
+				<header class="major">
+					<h2>Speech Synthesis Samples from Silent EMG</h2>
+				</header>
+				<p>
+					All samples below are synthesized from <b><i>silent</i></b> EMG (no audible speech was produced during recording), using EMG signals from the test set of Gaddy et al.
+					We show the 10 test utterances with the largest WER improvement over the baseline.
+					Transcripts are ASR outputs on the synthesized audio; WER is computed against the ground-truth text.
+				</p>
+				<p class="note">Tip: on a phone, each sample is shown as a card &mdash; Ground truth &rarr; Baseline &rarr; Ours.</p>
+
+				<div class="table-wrapper">
+					<table class="sample-table">
+						<thead>
+							<tr>
+								<th style="width:6%;">#</th>
+								<th style="width:28%;">Ground truth</th>
+								<th style="width:33%;">Baseline</th>
+								<th style="width:33%;">Ours (TAP-ETS)</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td class="num"><span class="num-badge">01</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>besides that there was quite a heap of bicycles</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/1_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">but since then there was quite a game of mysegals</div>
+										<div class="sample-meta">WER <span class="wer">55.56%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/1_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">besides that there was quite a team of bicycles</div>
+										<div class="sample-meta">WER <span class="wer good">11.11%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">02</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>henderson he called you saw that shooting star last night</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/2_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">enders in tikon do you follow that shooting star last night</div>
+										<div class="sample-meta">WER <span class="wer">50.00%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/2_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">henderson he called he saw that shooting star last night</div>
+										<div class="sample-meta">WER <span class="wer good">10.00%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">03</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>such things i told myself could not be</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/3_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">some of the things i told myself could not be me</div>
+										<div class="sample-meta">WER <span class="wer">50.00%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/3_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">so things i told myself could not be .</div>
+										<div class="sample-meta">WER <span class="wer good">12.50%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">04</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>i found a little crowd of perhaps 20 people surrounding the huge hole in which the cylinder lay</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/4_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">i felt a little crowd of perhaps twinning people surround the huge whole airmen to the cylinder lay</div>
+										<div class="sample-meta">WER <span class="wer">35.29%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/4_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">i found a little crowd of perhaps 20 people surrounding the huge hole in which the cylinder lay</div>
+										<div class="sample-meta">WER <span class="wer good">0.00%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">05</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>fearful massacres in the thames valley</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/5_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">fearful masters enter the thames of aeneas</div>
+										<div class="sample-meta">WER <span class="wer">66.67%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/5_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">fearful maskers into the thames valley</div>
+										<div class="sample-meta">WER <span class="wer good">33.33%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">06</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>that was it</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/6_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">that was data</div>
+										<div class="sample-meta">WER <span class="wer">33.33%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/6_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">that was it</div>
+										<div class="sample-meta">WER <span class="wer good">0.00%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">07</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>in spite of ogilvy i still believed that there were men in mars</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/7_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">it might have killed me i still believe and there were pen and bars</div>
+										<div class="sample-meta">WER <span class="wer">76.92%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/7_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">and might will be i still believe and there were men in mars</div>
+										<div class="sample-meta">WER <span class="wer good">46.15%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">08</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>the horse took the bit between his teeth and bolted</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/8_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">the horse looked the mid between the steve and bolted</div>
+										<div class="sample-meta">WER <span class="wer">40.00%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/8_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">the horse took the bit between his teeth and bolt</div>
+										<div class="sample-meta">WER <span class="wer good">10.00%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">09</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>all night long the martians were hammering and stirring sleepless indefatigable at work upon the machines they were making ready and ever and again a puff of greenish white smoke whirled up to the starlit sky</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/9_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">all dying long the martians were hammering and stirring sleeved this and defitting a bowl and worked upon the machine they were making ready and ever and again upon a greenish white smoke whirled up to the starlit sky</div>
+										<div class="sample-meta">WER <span class="wer">36.11%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/9_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">all night long the martians were hammering and stirring sleepless and unthinkable at work about the machines they were making ready and ever and again a puff of greenish white smoke whirled up to the starlit sky</div>
+										<div class="sample-meta">WER <span class="wer good">8.33%</span></div>
+									</div>
+								</td>
+							</tr>
+
+							<tr>
+								<td class="num"><span class="num-badge">10</span></td>
+								<td class="gt"><span class="gt-label">Ground truth</span>it hardly seemed a fair fight to me at that time</td>
+								<td class="base">
+									<div class="sample-box">
+										<div class="box-label">Baseline</div>
+										<audio controls preload="metadata"><source src="samples/10_base.wav" type="audio/wav" /></audio>
+										<div class="transcript">it hardly seemed to verify it to me at that time</div>
+										<div class="sample-meta">WER <span class="wer">27.27%</span></div>
+									</div>
+								</td>
+								<td class="ours">
+									<div class="sample-box">
+										<div class="box-label">Ours (TAP-ETS)</div>
+										<audio controls preload="metadata"><source src="samples/10_my.wav" type="audio/wav" /></audio>
+										<div class="transcript">it hardly seemed a fair fight to me at that time</div>
+										<div class="sample-meta">WER <span class="wer good">0.00%</span></div>
+									</div>
+								</td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</section>
+
+		<!-- Citation -->
+		<section id="cite" class="main style1">
+			<div class="container">
+				<header class="major">
+					<h2>Citation</h2>
+				</header>
+<pre><code>@inproceedings{han2026tapets,
+  title     = {{TAP-ETS}: Time Aligned Phoneme Guiding for {EMG}-to-Speech Synthesis},
+  author    = {Han, Dongyub and Hwang, Injune and Lee, Jaejun and Lee, Jiwon and Lee, Kyogu},
+  booktitle = {Proc. Interspeech 2026},
+  year      = {2026}
+}</code></pre>
+			</div>
+		</section>
+
+		<!-- Footer -->
+		<section id="footer">
+			<ul class="icons">
+				<li><a href="https://github.com/ongdyub/TAP-ETS" class="icon brands alt fa-github" target="_blank" rel="noopener"><span class="label">GitHub</span></a></li>
+				<li><a href="mailto:handy912@snu.ac.kr" class="icon solid alt fa-envelope"><span class="label">Email</span></a></li>
+			</ul>
+			<ul class="copyright">
+				<li>&copy; 2026 MARG, Seoul National University</li>
+				<li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+			</ul>
+		</section>
+
+		<!-- Scripts -->
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/jquery.scrolly.min.js"></script>
+		<script src="assets/js/browser.min.js"></script>
+		<script src="assets/js/breakpoints.min.js"></script>
+		<script src="assets/js/util.js"></script>
+		<script src="assets/js/main.js"></script>
+
+	</body>
+</html>

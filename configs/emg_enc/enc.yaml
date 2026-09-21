@@ -1,0 +1,4 @@
+model_size: 768
+num_layers: 6
+dropout: 0.2
+use_channel: [0, 1, 2, 3, 4, 5, 6, 7]

@@ -1,0 +1,21 @@
+defaults:
+  - common
+  - trainer: trainer
+  - optimizer: adamw
+  - feature: mspec22        # only frame_rate is used
+  - _self_
+
+exp_name: ???
+resume: null
+target_sec: 4
+batch_size: 64
+num_workers: 4
+
+refiner:
+  model_size: 768
+  num_layers: 6             # encoder and decoder
+  dropout: 0.2
+p_corrupt: 1.0              # frames selected for corruption
+p_mask: 0.2                 # selected frame -> [MASK]
+p_replace: 0.5              # selected frame -> random phoneme
+alpha_clean: 0.1            # weight of the clean-frame loss

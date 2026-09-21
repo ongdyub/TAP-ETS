@@ -1,0 +1,4 @@
+defaults:
+  - common
+  - feature: mspec22
+  - _self_

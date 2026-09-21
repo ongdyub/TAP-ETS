@@ -1,0 +1,8 @@
+seed: 97
+data_path: /workspace/data            # emg_data/, text_alignments/, silent_speech_dataset/, preprocessed/
+exp_path: /workspace/data/exp         # checkpoints, logs and synthesis outputs
+mfa_path: /workspace/data/mfa_aligned # LibriSpeech TextGrids, {train,dev}-clean/ (refinement model only)
+
+hydra:
+  run:
+    dir: ${exp_path}/hydra/${now:%Y-%m-%d}/${now:%H-%M-%S}

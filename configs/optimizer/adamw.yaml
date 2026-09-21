@@ -1,0 +1,6 @@
+target: torch.optim.AdamW
+lr_warmup: 500
+
+params:
+  lr: 0.001
+  weight_decay: 1e-7
